@@ -50,20 +50,14 @@ namespace Collection
             {
                 position = -1;
             }
-            object IEnumerator.Current
+         public   object Current
             {
                 get
                 {
-                    return Current;
+                    return _days[position];
                 }
             }
-            public String Current
-            {
-                get
-                {
-                        return _days[position];
-                }
-            }
+          
         }
     }
 }
