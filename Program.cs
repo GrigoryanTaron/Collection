@@ -10,20 +10,14 @@ namespace Collection
         {
             DayOfWeek day = new DayOfWeek();
 
-
-
             foreach (var item in day)
             {
                 Console.WriteLine($"{item}");
-
             }
-
         }
-        public class DayOfWeek : IEnumerable
+        public class DayOfWeek
         {
-            //private string[] _days = new string[7];
             List<string> _days = new List<string>();
-
             public DayOfWeek()
             {
                 _days.Add("Moday");
@@ -33,90 +27,44 @@ namespace Collection
                 _days.Add("Friday");
                 _days.Add("Saturday");
                 _days.Add("Sunday");
-
             }
+            public DayOfWeekEnum GetEnumerator()
+            {
+                return new DayOfWeekEnum(_days);
+            }
+        }
+        public class DayOfWeekEnum : IEnumerator
+        {
+            public List<string> _days;
             int position = -1;
-
-            public object Current => _days;
-            public IEnumerator GetEnumerator()
+            public DayOfWeekEnum(List<string> list)
             {
-                foreach (string item in _days)
-                {
-                     return GetEnumerator();
-                }
-               
+                _days = list;
             }
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
-
-
             public bool MoveNext()
             {
                 position++;
-                return position < _days.Count;
+                return (position < _days.Count);
             }
-
             public void Reset()
             {
                 position = -1;
             }
-
-
-        }
-        //
-        // Summary:
-        //     Exposes the enumerator, which supports a simple iteration over a collection of
-        //     a specified type.
-        //
-        // Type parameters:
-        //   T:
-        //     The type of objects to enumerate.
-        public interface IEnumerable : IEnumerator
-        {
-            //
-            // Summary:
-            //     Returns an enumerator that iterates through the collection.
-            //
-            // Returns:
-            //     An enumerator that can be used to iterate through the collection.
-            IEnumerator GetEnumerator();
-        }
-        public interface IEnumerator
-        {
-            //
-            // Summary:
-            //     Gets the element in the collection at the current position of the enumerator.
-            //
-            // Returns:
-            //     The element in the collection at the current position of the enumerator.
-            object Current { get; }
-
-            //
-            // Summary:
-            //     Advances the enumerator to the next element of the collection.
-            //
-            // Returns:
-            //     true if the enumerator was successfully advanced to the next element; false if
-            //     the enumerator has passed the end of the collection.
-            //
-            // Exceptions:
-            //   T:System.InvalidOperationException:
-            //     The collection was modified after the enumerator was created.
-            bool MoveNext();
-            //
-            // Summary:
-            //     Sets the enumerator to its initial position, which is before the first element
-            //     in the collection.
-            //
-            // Exceptions:
-            //   T:System.InvalidOperationException:
-            //     The collection was modified after the enumerator was created.
-            void Reset();
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+            public String Current
+            {
+                get
+                {
+                        return _days[position];
+                }
+            }
         }
     }
-
-
 }
 
